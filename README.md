@@ -1,3 +1,1 @@
-# vote
-django
-a voting app build with django
+A simple voting app build with django
