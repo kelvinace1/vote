@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<title>Bootstrap Elegant Sign Up Form with Icons</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style type="text/css">
+	body {
+		color: #999;
+		background: #f5f5f5;
+		font-family: 'Roboto', sans-serif;
+		font-size: 20px;
+		border-bottom-width: 100px;
+		border-left-width: 20;
+		font-style: oblique;
+		margin-left: 15px;
+	}
+
+	h1 { 
+    display: block;
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: 2px;
+    margin-right: 0;
+    font-weight: bold;
+}
+   p  {
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+
+form {
+  background: -webkit-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
+  background: -moz-linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
+  background: linear-gradient(bottom, #CCCCCC, #EEEEEE 175px);
+  margin: auto;
+  margin-left: 10px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  position: absolute;
+  width: 350px;
+  height: 240px;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 24px;
+  font-weight: bold;
+  color: #09C;
+  text-decoration: none;
+  border-radius: 10px;
+  padding: 10px;
+  border: 1px solid rgb(122, 80, 80);
+  border: inset 1px solid #333;
+  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+button {
+  width: 100px;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  background: #09C;
+  color: #fff;
+  font-family: Tahoma, Geneva, sans-serif;
+  height: 50px;
+  border-radius: 15px;
+  border: 1px solid #999;
+}
+
+input.button:hover {
+  background: #fff;
+  color: #09C;
+}
+
+.signup-form .form-group {
+		margin-bottom: 20px;
+	}
+	.signup-form label {
+		font-weight: normal;
+		font-size: 13px;
+	}
+	.signup-form .form-control {
+		min-height: 38px;
+		box-shadow: none !important;
+		border-width: 0 0 1px 0;
+	}	
+
+	.signup-form .input-group-addon {
+		max-width: 42px;
+		text-align: center;
+		background: none;
+		border-width: 0 0 1px 0;
+		padding-left: 5px;
+	}
+</style>
+</head>
+<body>
+	<a href="{% url 'logout' %}">Logout</a>
+	<h1>Welcome to your voting app</h1>
+
+	<p> Below are list of available candidate to vote for: </p>
+	<ul>
+	{% for u in user %}
+	<li>
+		{{u.name}}
+	</li>
+	{% endfor %}
+	</ul>
+
+	<br>
+	{% if not user.vote_status %}
+
+	<p>Enter candidate below name to cast your vote</p>
+	<form action="{% url 'vote' %}"  method="post">
+		{% csrf_token %}
+		<ul>
+			{% for e in form.errors %}
+			<li style="color:red">{{ e }} </li>
+			{% endfor %}
+		</ul>
+		<div class="form-group">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-user"></i></span>
+				{{form.name}}
+			</div>
+		</div>
+		<button type="submit" >Vote  Now</button>	
+
+	</form>
+
+	{% else %}
+	<p>h</p>
+	{% endif %}
+
+
+</body>
+</html>
